@@ -1,4 +1,4 @@
-package com.devteria.identity;
+package com.vti.identity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

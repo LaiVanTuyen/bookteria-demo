@@ -1,4 +1,4 @@
-package com.devteria.identity.controller;
+package com.vti.identity.controller;
 
 import java.text.ParseException;
 
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devteria.identity.dto.request.*;
-import com.devteria.identity.dto.response.AuthenticationResponse;
-import com.devteria.identity.dto.response.IntrospectResponse;
-import com.devteria.identity.service.AuthenticationService;
+import com.vti.identity.dto.request.*;
+import com.vti.identity.dto.response.AuthenticationResponse;
+import com.vti.identity.dto.response.IntrospectResponse;
+import com.vti.identity.service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
 
 import lombok.AccessLevel;

@@ -1,13 +1,13 @@
-package com.devteria.identity.controller;
+package com.vti.identity.controller;
 
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.devteria.identity.dto.request.ApiResponse;
-import com.devteria.identity.dto.request.RoleRequest;
-import com.devteria.identity.dto.response.RoleResponse;
-import com.devteria.identity.service.RoleService;
+import com.vti.identity.dto.request.ApiResponse;
+import com.vti.identity.dto.request.RoleRequest;
+import com.vti.identity.dto.response.RoleResponse;
+import com.vti.identity.service.RoleService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,11 @@
-package com.devteria.identity.repository;
+package com.vti.identity.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.devteria.identity.entity.User;
+import com.vti.identity.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {

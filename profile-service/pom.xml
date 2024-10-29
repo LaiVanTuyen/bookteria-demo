@@ -41,6 +41,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-neo4j</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -108,10 +112,10 @@
 				</executions>
 				<configuration>
 					<excludes>
-						<exclude>com/devteria/profile/dto/**</exclude>
-						<exclude>com/devteria/profile/entity/**</exclude>
-						<exclude>com/devteria/profile/mapper/**</exclude>
-						<exclude>com/devteria/profile/configuration/**</exclude>
+						<exclude>com/vti/profile/dto/**</exclude>
+						<exclude>com/vti/profile/entity/**</exclude>
+						<exclude>com/vti/profile/mapper/**</exclude>
+						<exclude>com/vti/profile/configuration/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

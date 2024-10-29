@@ -1,4 +1,4 @@
-package com.devteria.identity.controller;
+package com.vti.identity.controller;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.devteria.identity.dto.request.ApiResponse;
-import com.devteria.identity.dto.request.UserCreationRequest;
-import com.devteria.identity.dto.request.UserUpdateRequest;
-import com.devteria.identity.dto.response.UserResponse;
-import com.devteria.identity.service.UserService;
+import com.vti.identity.dto.request.ApiResponse;
+import com.vti.identity.dto.request.UserCreationRequest;
+import com.vti.identity.dto.request.UserUpdateRequest;
+import com.vti.identity.dto.response.UserResponse;
+import com.vti.identity.service.UserService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

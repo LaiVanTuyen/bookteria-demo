@@ -1,4 +1,4 @@
-package com.devteria.profile.dto.response;
+package com.vti.profile.dto.response;
 
 import java.time.LocalDate;
 

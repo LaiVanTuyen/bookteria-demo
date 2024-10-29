@@ -1,4 +1,4 @@
-package com.devteria.identity.dto.request;
+package com.vti.identity.dto.request;
 
 import java.util.Set;
 

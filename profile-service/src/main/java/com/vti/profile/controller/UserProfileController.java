@@ -1,10 +1,10 @@
-package com.devteria.profile.controller;
+package com.vti.profile.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.devteria.profile.dto.request.ProfileCreationRequest;
-import com.devteria.profile.dto.response.UserProfileReponse;
-import com.devteria.profile.service.UserProfileService;
+import com.vti.profile.dto.request.ProfileCreationRequest;
+import com.vti.profile.dto.response.UserProfileReponse;
+import com.vti.profile.service.UserProfileService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

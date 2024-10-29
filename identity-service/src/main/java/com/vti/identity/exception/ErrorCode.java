@@ -1,4 +1,4 @@
-package com.devteria.identity.exception;
+package com.vti.identity.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

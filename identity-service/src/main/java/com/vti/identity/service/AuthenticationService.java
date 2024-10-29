@@ -1,4 +1,4 @@
-package com.devteria.identity.service;
+package com.vti.identity.service;
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -13,18 +13,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.devteria.identity.dto.request.AuthenticationRequest;
-import com.devteria.identity.dto.request.IntrospectRequest;
-import com.devteria.identity.dto.request.LogoutRequest;
-import com.devteria.identity.dto.request.RefreshRequest;
-import com.devteria.identity.dto.response.AuthenticationResponse;
-import com.devteria.identity.dto.response.IntrospectResponse;
-import com.devteria.identity.entity.InvalidatedToken;
-import com.devteria.identity.entity.User;
-import com.devteria.identity.exception.AppException;
-import com.devteria.identity.exception.ErrorCode;
-import com.devteria.identity.repository.InvalidatedTokenRepository;
-import com.devteria.identity.repository.UserRepository;
+import com.vti.identity.dto.request.AuthenticationRequest;
+import com.vti.identity.dto.request.IntrospectRequest;
+import com.vti.identity.dto.request.LogoutRequest;
+import com.vti.identity.dto.request.RefreshRequest;
+import com.vti.identity.dto.response.AuthenticationResponse;
+import com.vti.identity.dto.response.IntrospectResponse;
+import com.vti.identity.entity.InvalidatedToken;
+import com.vti.identity.entity.User;
+import com.vti.identity.exception.AppException;
+import com.vti.identity.exception.ErrorCode;
+import com.vti.identity.repository.InvalidatedTokenRepository;
+import com.vti.identity.repository.UserRepository;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;

@@ -1,15 +1,15 @@
-package com.devteria.identity.service;
+package com.vti.identity.service;
 
 import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.devteria.identity.dto.request.RoleRequest;
-import com.devteria.identity.dto.response.RoleResponse;
-import com.devteria.identity.mapper.RoleMapper;
-import com.devteria.identity.repository.PermissionRepository;
-import com.devteria.identity.repository.RoleRepository;
+import com.vti.identity.dto.request.RoleRequest;
+import com.vti.identity.dto.response.RoleResponse;
+import com.vti.identity.mapper.RoleMapper;
+import com.vti.identity.repository.PermissionRepository;
+import com.vti.identity.repository.RoleRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

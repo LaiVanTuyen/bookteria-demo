@@ -1,10 +1,10 @@
-package com.devteria.identity.dto.request;
+package com.vti.identity.dto.request;
 
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Size;
 
-import com.devteria.identity.validator.DobConstraint;
+import com.vti.identity.validator.DobConstraint;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

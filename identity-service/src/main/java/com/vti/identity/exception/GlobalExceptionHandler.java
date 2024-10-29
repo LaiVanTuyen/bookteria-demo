@@ -1,4 +1,4 @@
-package com.devteria.identity.exception;
+package com.vti.identity.exception;
 
 import java.util.Map;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.devteria.identity.dto.request.ApiResponse;
+import com.vti.identity.dto.request.ApiResponse;
 
 import lombok.extern.slf4j.Slf4j;
 

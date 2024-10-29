@@ -1,4 +1,4 @@
-package com.devteria.identity.validator;
+package com.vti.identity.validator;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

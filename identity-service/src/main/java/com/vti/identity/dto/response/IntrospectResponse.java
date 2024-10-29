@@ -1,4 +1,4 @@
-package com.devteria.identity.dto.response;
+package com.vti.identity.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

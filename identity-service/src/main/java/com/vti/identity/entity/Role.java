@@ -1,4 +1,4 @@
-package com.devteria.identity.entity;
+package com.vti.identity.entity;
 
 import java.util.Set;
 
