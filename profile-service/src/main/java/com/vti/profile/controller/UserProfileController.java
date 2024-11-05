@@ -1,9 +1,9 @@
 package com.vti.profile.controller;
 
+import com.vti.profile.dto.response.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
 
 import com.vti.profile.dto.request.ProfileCreationRequest;
-import com.vti.profile.dto.response.UserProfileReponse;
 import com.vti.profile.service.UserProfileService;
 
 import lombok.AccessLevel;
@@ -17,12 +17,17 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @PostMapping("/users")
-    UserProfileReponse createProfile(@RequestBody ProfileCreationRequest request) {
+    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
         return userProfileService.createProfile(request);
     }
 
     @GetMapping("/users/{profileId}")
-    UserProfileReponse getProfile(@PathVariable String profileId) {
+    UserProfileResponse getProfile(@PathVariable String profileId) {
         return userProfileService.getProfile(profileId);
+    }
+
+    @GetMapping("/users/userId={userId}")
+    UserProfileResponse getProfileByUserId(@PathVariable String userId) {
+        return userProfileService.getProfileByUserId(userId);
     }
 }

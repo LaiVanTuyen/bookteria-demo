@@ -3,6 +3,10 @@ package com.vti.identity.service;
 import java.util.HashSet;
 import java.util.List;
 
+import com.vti.identity.dto.response.UserProfileResponse;
+import com.vti.identity.mapper.ProfileMapper;
+import com.vti.identity.repository.httpClient.ProfileClient;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,6 +38,8 @@ public class UserService {
     RoleRepository roleRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    ProfileClient profileClient;
+    ProfileMapper profileMapper;
 
     public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) throw new AppException(ErrorCode.USER_EXISTED);
@@ -45,8 +51,18 @@ public class UserService {
         roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
 
         user.setRoles(roles);
+        user = userRepository.save(user);
 
-        return userMapper.toUserResponse(userRepository.save(user));
+        var profileRequest = profileMapper.toProfileCreationRequest(request);
+        profileRequest.setUserId(user.getId());
+
+        log.info("In method create profile:{}", profileRequest);
+
+        UserProfileResponse userProfileResponse = profileClient.createProfile(profileRequest);
+
+        UserResponse userResponse = userMapper.toUserResponse(user);
+        BeanUtils.copyProperties(userProfileResponse, userResponse);
+        return userResponse;
     }
 
     public UserResponse getMyInfo() {
@@ -79,7 +95,15 @@ public class UserService {
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         log.info("In method get Users");
-        return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
+        List<UserResponse> userResponses = userRepository.findAll().stream()
+                .map(user -> {
+                    UserResponse userResponse = userMapper.toUserResponse(user);
+                    BeanUtils.copyProperties(profileClient.getProfileByUserId(user.getId()), userResponse);
+                    return userResponse;
+                })
+                .toList();
+
+        return userResponses;
     }
 
     @PreAuthorize("hasRole('ADMIN')")

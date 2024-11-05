@@ -1,17 +1,18 @@
-package com.vti.profile.dto.response;
-
-import java.time.LocalDate;
+package com.vti.identity.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserProfileReponse {
+public class UserProfileResponse {
     String id;
+    String userId;
     String firstName;
     String lastName;
     LocalDate dob;
