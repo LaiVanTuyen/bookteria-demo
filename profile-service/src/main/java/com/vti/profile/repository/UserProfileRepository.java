@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserProfileRepository extends Neo4jRepository<UserProfile, String> {
-    @Query("MATCH (u:UserProfile) WHERE u.userId = $userId RETURN u")
+    @Query("MATCH (u:user_profile) WHERE u.userId = $userId RETURN u")
     Optional<UserProfile> findByUserId(String userId);
 }

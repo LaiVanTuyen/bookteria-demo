@@ -14,6 +14,6 @@ public interface ProfileClient {
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request);
 
-    @GetMapping(value = "/users/userId={userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserProfileResponse getProfileByUserId(@PathVariable String userId);
 }

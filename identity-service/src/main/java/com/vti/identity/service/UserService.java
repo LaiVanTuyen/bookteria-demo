@@ -95,15 +95,13 @@ public class UserService {
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
         log.info("In method get Users");
-        List<UserResponse> userResponses = userRepository.findAll().stream()
+        return userRepository.findAll().stream()
                 .map(user -> {
                     UserResponse userResponse = userMapper.toUserResponse(user);
                     BeanUtils.copyProperties(profileClient.getProfileByUserId(user.getId()), userResponse);
                     return userResponse;
                 })
                 .toList();
-
-        return userResponses;
     }
 
     @PreAuthorize("hasRole('ADMIN')")

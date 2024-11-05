@@ -2,6 +2,9 @@ package com.vti.identity.configuration;
 
 import java.util.HashSet;
 
+import com.vti.identity.dto.request.UserCreationRequest;
+import com.vti.identity.mapper.ProfileMapper;
+import com.vti.identity.repository.httpClient.ProfileClient;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApplicationInitConfig {
 
+    ProfileClient profileClient;
+    ProfileMapper profileMapper;
     PasswordEncoder passwordEncoder;
 
     @NonFinal
@@ -61,8 +66,20 @@ public class ApplicationInitConfig {
                         .password(passwordEncoder.encode(ADMIN_PASSWORD))
                         .roles(roles)
                         .build();
+                UserCreationRequest request = UserCreationRequest.builder()
+                        .city("Hanoi")
+                        .dob(java.time.LocalDate.of(1999, 1, 1))
+                        .firstName("Admin")
+                        .lastName("Admin")
+                        .password(ADMIN_PASSWORD)
+                        .username(ADMIN_USER_NAME)
+                        .build();
 
                 userRepository.save(user);
+
+                var profileRequest = profileMapper.toProfileCreationRequest(request);
+                profileRequest.setUserId(user.getId());
+                profileClient.createProfile(profileRequest);
                 log.warn("admin user has been created with default password: admin, please change it");
             }
             log.info("Application initialization completed .....");

@@ -9,3 +9,7 @@ spring:
     authentication:
       username: neo4j
       password: 25112001
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

@@ -21,12 +21,12 @@ public class UserProfileController {
         return userProfileService.createProfile(request);
     }
 
-    @GetMapping("/users/{profileId}")
+    @GetMapping("/{profileId}")
     UserProfileResponse getProfile(@PathVariable String profileId) {
         return userProfileService.getProfile(profileId);
     }
 
-    @GetMapping("/users/userId={userId}")
+    @GetMapping("/users/{userId}")
     UserProfileResponse getProfileByUserId(@PathVariable String userId) {
         return userProfileService.getProfileByUserId(userId);
     }
