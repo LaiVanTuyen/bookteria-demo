@@ -30,6 +30,7 @@ public class AuthenticationController {
         return ApiResponse.<AuthenticationResponse>builder().result(result).build();
     }
 
+    // kiểm tra token có hợp lệ hay không!!!
     @PostMapping("/introspect")
     ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request)
             throws ParseException, JOSEException {
