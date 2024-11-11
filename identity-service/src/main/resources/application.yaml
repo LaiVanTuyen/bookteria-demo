@@ -17,6 +17,10 @@ spring:
 jwt:
   signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
 
-app:
+profile:
   services:
-    profile: http://localhost:8081/profile/internal
+    url: http://localhost:8081/profile/internal
+
+identity:
+  token:
+    url: http://localhost:8888/api/v1/identity/auth/token

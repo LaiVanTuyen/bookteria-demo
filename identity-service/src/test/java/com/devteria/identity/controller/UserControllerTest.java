@@ -16,9 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.devteria.identity.dto.request.UserCreationRequest;
-import com.devteria.identity.dto.response.UserResponse;
-import com.devteria.identity.service.UserService;
+import com.vti.identity.dto.request.UserCreationRequest;
+import com.vti.identity.dto.response.UserResponse;
+import com.vti.identity.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 

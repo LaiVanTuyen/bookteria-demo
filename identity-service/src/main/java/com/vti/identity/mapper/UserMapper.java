@@ -1,5 +1,6 @@
 package com.vti.identity.mapper;
 
+import com.vti.identity.dto.request.ApiResponse;
 import com.vti.identity.dto.response.UserProfileResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,8 +16,6 @@ public interface UserMapper {
     User toUser(UserCreationRequest request);
 
     UserResponse toUserResponse(User user);
-
-    UserResponse toUserResponse(UserProfileResponse user);
 
     @Mapping(target = "roles", ignore = true)
     void updateUser(@MappingTarget User user, UserUpdateRequest request);

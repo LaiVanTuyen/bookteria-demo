@@ -3,9 +3,11 @@ package com.vti.identity.service;
 import java.util.HashSet;
 import java.util.List;
 
+import com.vti.identity.dto.request.ApiResponse;
 import com.vti.identity.dto.response.UserProfileResponse;
 import com.vti.identity.mapper.ProfileMapper;
 import com.vti.identity.repository.httpClient.ProfileClient;
+import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 @RequiredArgsConstructor
@@ -58,10 +62,12 @@ public class UserService {
 
         log.info("In method create profile:{}", profileRequest);
 
-        UserProfileResponse userProfileResponse = profileClient.createProfile(profileRequest);
+        ApiResponse<UserProfileResponse> userProfileResponse = profileClient.createProfile(profileRequest);
         log.info("In method create profile:{}", userProfileResponse);
         UserResponse userResponse = userMapper.toUserResponse(user);
-        BeanUtils.copyProperties(userProfileResponse, userResponse);
+        userResponse.setFirstName(userProfileResponse.getResult().getFirstName());
+        userResponse.setLastName(userProfileResponse.getResult().getLastName());
+        userResponse.setDob(userProfileResponse.getResult().getDob());
         return userResponse;
     }
 
@@ -94,11 +100,29 @@ public class UserService {
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
-        log.info("In method get Users");
+        ServletRequestAttributes servletRequestAttributes =
+                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
+        log.info("In method get header:{}", authHeader);
+
         return userRepository.findAll().stream()
                 .map(user -> {
                     UserResponse userResponse = userMapper.toUserResponse(user);
-                    BeanUtils.copyProperties(profileClient.getProfileByUserId(user.getId()), userResponse);
+                    log.info("In method get User {}", user);
+
+                    try {
+                        ApiResponse<UserProfileResponse> profileResponse = profileClient.getProfileByUserId(user.getId());
+                        if (profileResponse != null) {
+                            userResponse.setFirstName(profileResponse.getResult().getFirstName());
+                            userResponse.setLastName(profileResponse.getResult().getLastName());
+                            userResponse.setDob(profileResponse.getResult().getDob());
+                        } else {
+                            log.warn("Profile response is null for user ID: {}", user.getId());
+                        }
+                    } catch (Exception e) {
+                        log.error("Failed to fetch profile for user ID: {}", user.getId(), e);
+                        new AppException(ErrorCode.USER_NOT_EXISTED);
+                    }
                     return userResponse;
                 })
                 .toList();
