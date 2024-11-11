@@ -1,17 +1,18 @@
 package com.vti.profile.service;
 
-import com.vti.profile.dto.response.UserProfileResponse;
-import org.springframework.stereotype.Service;
-
 import com.vti.profile.dto.request.ProfileCreationRequest;
+import com.vti.profile.dto.response.UserProfileResponse;
 import com.vti.profile.entity.UserProfile;
 import com.vti.profile.mapper.UserProfileMapper;
 import com.vti.profile.repository.UserProfileRepository;
-
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +35,18 @@ public class UserProfileService {
 
         return userProfileMapper.toUserProfileReponse(userProfile);
     }
+
     public UserProfileResponse getProfileByUserId(String userId) {
         UserProfile userProfile =
                 userProfileRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("Profile not found"));
 
         return userProfileMapper.toUserProfileReponse(userProfile);
+    }
+
+//    @PreAuthorize("hasRole('ADMIN')")
+    public List<UserProfileResponse> getAllProfiles() {
+        var profiles = userProfileRepository.findAll();
+
+        return profiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
     }
 }

@@ -59,7 +59,7 @@ public class UserService {
         log.info("In method create profile:{}", profileRequest);
 
         UserProfileResponse userProfileResponse = profileClient.createProfile(profileRequest);
-
+        log.info("In method create profile:{}", userProfileResponse);
         UserResponse userResponse = userMapper.toUserResponse(user);
         BeanUtils.copyProperties(userProfileResponse, userResponse);
         return userResponse;

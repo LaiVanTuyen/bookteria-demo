@@ -1,5 +1,6 @@
 package com.vti.profile.controller;
 
+import com.vti.profile.dto.ApiResponse;
 import com.vti.profile.dto.response.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -17,17 +20,31 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @PostMapping("/users")
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
-        return userProfileService.createProfile(request);
+    ApiResponse<UserProfileResponse> createProfile(@RequestBody ProfileCreationRequest request) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.createProfile(request))
+                .build();
     }
 
     @GetMapping("/{profileId}")
-    UserProfileResponse getProfile(@PathVariable String profileId) {
-        return userProfileService.getProfile(profileId);
+    ApiResponse<UserProfileResponse> getProfile(@PathVariable String profileId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getProfile(profileId))
+                .build();
     }
 
     @GetMapping("/users/{userId}")
-    UserProfileResponse getProfileByUserId(@PathVariable String userId) {
-        return userProfileService.getProfileByUserId(userId);
+    ApiResponse<UserProfileResponse> getProfileByUserId(@PathVariable String userId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getProfileByUserId(userId))
+                .build();
     }
+
+    @GetMapping("/users")
+    ApiResponse<List<UserProfileResponse>> getAllProfiles() {
+        return ApiResponse.<List<UserProfileResponse>>builder()
+                .result(userProfileService.getAllProfiles())
+                .build();
+    }
+
 }

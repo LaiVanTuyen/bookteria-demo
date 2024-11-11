@@ -1,5 +1,6 @@
 package com.vti.profile.controller;
 
+import com.vti.profile.dto.ApiResponse;
 import com.vti.profile.dto.request.ProfileCreationRequest;
 import com.vti.profile.dto.response.UserProfileResponse;
 import com.vti.profile.service.UserProfileService;
@@ -12,21 +13,28 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequestMapping(value = "/internal")
 public class InternalUserProfileController {
     UserProfileService userProfileService;
 
-    @PostMapping("/internal/users")
-    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
-        return userProfileService.createProfile(request);
+    @PostMapping("/users/register")
+    ApiResponse<UserProfileResponse> createProfile(@RequestBody ProfileCreationRequest request) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.createProfile(request))
+                .build();
     }
 
-    @GetMapping("/internal/{profileId}")
-    UserProfileResponse getProfile(@PathVariable String profileId) {
-        return userProfileService.getProfile(profileId);
+    @GetMapping("/{profileId}")
+    ApiResponse<UserProfileResponse> getProfile(@PathVariable String profileId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getProfile(profileId))
+                .build();
     }
 
-    @GetMapping("/internal/users/{userId}")
-    UserProfileResponse getProfileByUserId(@PathVariable String userId) {
-        return userProfileService.getProfileByUserId(userId);
+    @GetMapping("/users/{userId}")
+    ApiResponse<UserProfileResponse> getProfileByUserId(@PathVariable String userId) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.getProfileByUserId(userId))
+                .build();
     }
 }
