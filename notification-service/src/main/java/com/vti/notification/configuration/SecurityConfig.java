@@ -1,4 +1,4 @@
-package com.vti.profile.configuration;
+package com.vti.notification.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_ENDPOINTS = {
+            "/email/send"
     };
 
     private final CustomJwtDecoder customJwtDecoder;

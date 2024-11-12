@@ -1,4 +1,4 @@
-package com.vti.profile.exception;
+package com.vti.notification.exception;
 
 public class AppException extends RuntimeException {
 

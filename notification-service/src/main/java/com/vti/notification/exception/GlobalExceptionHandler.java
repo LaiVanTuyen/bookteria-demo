@@ -1,6 +1,6 @@
-package com.vti.profile.exception;
+package com.vti.notification.exception;
 
-import com.vti.profile.dto.ApiResponse;
+import com.vti.notification.dto.ApiResponse;
 import jakarta.validation.ConstraintViolation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

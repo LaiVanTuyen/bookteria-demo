@@ -1,4 +1,4 @@
-package com.vti.profile.configuration;
+package com.vti.notification.configuration;
 
 import com.nimbusds.jwt.SignedJWT;
 import org.springframework.security.oauth2.jwt.Jwt;

@@ -1,7 +1,7 @@
-package com.vti.profile.configuration;
+package com.vti.notification.configuration;
 
-import com.vti.profile.dto.ApiResponse;
-import com.vti.profile.exception.ErrorCode;
+import com.vti.notification.dto.ApiResponse;
+import com.vti.notification.exception.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
