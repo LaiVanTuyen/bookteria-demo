@@ -3,6 +3,7 @@ package com.vti.identity.service;
 import java.util.HashSet;
 import java.util.List;
 
+import com.vti.event.dto.NotificationEvent;
 import com.vti.identity.dto.request.ApiResponse;
 import com.vti.identity.dto.response.UserProfileResponse;
 import com.vti.identity.mapper.ProfileMapper;
@@ -45,7 +46,7 @@ public class UserService {
     PasswordEncoder passwordEncoder;
     ProfileClient profileClient;
     ProfileMapper profileMapper;
-    KafkaTemplate<String, String> kafkaTemplate;
+    KafkaTemplate<String, Object> kafkaTemplate;
 
 
     public UserResponse createUser(UserCreationRequest request) {
@@ -72,8 +73,15 @@ public class UserService {
         userResponse.setLastName(userProfileResponse.getResult().getLastName());
         userResponse.setDob(userProfileResponse.getResult().getDob());
 
-        // public message to kafka
-        kafkaTemplate.send("onboard-successful", "Welcome our new member " + user.getUsername());
+        NotificationEvent notificationEvent = NotificationEvent.builder()
+                .channel("EMAIL")
+                .recipient(request.getEmail())
+                .subject("Welcome to VTI")
+                .body("Hello, " + request.getUsername())
+                .build();
+
+        // Publish message to kafka
+        kafkaTemplate.send("notification-delivery", notificationEvent);
         return userResponse;
     }
 
