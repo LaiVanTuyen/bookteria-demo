@@ -9,6 +9,7 @@ import com.vti.identity.mapper.ProfileMapper;
 import com.vti.identity.repository.httpClient.ProfileClient;
 import lombok.val;
 import org.springframework.beans.BeanUtils;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,6 +45,8 @@ public class UserService {
     PasswordEncoder passwordEncoder;
     ProfileClient profileClient;
     ProfileMapper profileMapper;
+    KafkaTemplate<String, String> kafkaTemplate;
+
 
     public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) throw new AppException(ErrorCode.USER_EXISTED);
@@ -68,6 +71,9 @@ public class UserService {
         userResponse.setFirstName(userProfileResponse.getResult().getFirstName());
         userResponse.setLastName(userProfileResponse.getResult().getLastName());
         userResponse.setDob(userProfileResponse.getResult().getDob());
+
+        // public message to kafka
+        kafkaTemplate.send("onboard-successful", "Welcome our new member " + user.getUsername());
         return userResponse;
     }
 
