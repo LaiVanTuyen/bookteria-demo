@@ -12,6 +12,7 @@ import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -122,6 +123,9 @@ public class UserService {
                 (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
         log.info("In method get header:{}", authHeader);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Authentication: {}", authentication);
 
         return userRepository.findAll().stream()
                 .map(user -> {
