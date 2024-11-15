@@ -9,17 +9,23 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Slf4j
+@Component
 public class AuthenticationRequestInterceptor implements RequestInterceptor {
     // Modify the request template before sending the request
     @Override
     public void apply(RequestTemplate requestTemplate) {
         ServletRequestAttributes servletRequestAttributes =
                 (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
-        log.info("In method get header:{}", authHeader);
 
-        if (StringUtils.hasText(authHeader)) {
-            requestTemplate.header("Authorization", authHeader);
+        if (servletRequestAttributes != null) {
+            var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
+            log.info("In method get header:{}", authHeader);
+
+            if (StringUtils.hasText(authHeader)) {
+                requestTemplate.header("Authorization", authHeader);
+            }
+        } else {
+            log.warn("ServletRequestAttributes is null, could not get the Authorization header");
         }
     }
 }

@@ -39,6 +39,9 @@ public class ApplicationInitConfig {
     @NonFinal
     static final String ADMIN_PASSWORD = "admin";
 
+    @NonFinal
+    static final String ADMIN_EMAIL = "admin@gmail.com";
+
     @Bean
     @ConditionalOnProperty(
             prefix = "spring",
@@ -63,6 +66,7 @@ public class ApplicationInitConfig {
 
                 User user = User.builder()
                         .username(ADMIN_USER_NAME)
+                        .email(ADMIN_EMAIL)
                         .password(passwordEncoder.encode(ADMIN_PASSWORD))
                         .roles(roles)
                         .build();
@@ -71,6 +75,7 @@ public class ApplicationInitConfig {
                         .dob(java.time.LocalDate.of(1999, 1, 1))
                         .firstName("Admin")
                         .lastName("Admin")
+                        .email(ADMIN_EMAIL)
                         .password(ADMIN_PASSWORD)
                         .username(ADMIN_USER_NAME)
                         .build();

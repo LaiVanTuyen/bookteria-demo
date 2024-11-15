@@ -5,22 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa0d1931-5f39-41dd-adef-6fb0ef8ece55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/dto/PageResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Post.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Profile.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/postService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configurations/configuration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurations/configuration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Scene.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Scene.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/userService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/userService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Post.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "course/pagination",
+    "git-widget-placeholder": "course/get-profile-info",
     "last_opened_file_path": "D:/LotteLDCC/LDCC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -109,6 +95,7 @@
       <updated>1731385828004</updated>
       <workItem from="1731385835809" duration="3987000" />
       <workItem from="1731566263817" duration="1385000" />
+      <workItem from="1731652650183" duration="425000" />
     </task>
     <servers />
   </component>

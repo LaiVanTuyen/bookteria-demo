@@ -3,9 +3,11 @@ package com.devteria.post.service;
 import com.devteria.post.dto.PageResponse;
 import com.devteria.post.dto.request.PostRequest;
 import com.devteria.post.dto.response.PostResponse;
+import com.devteria.post.dto.response.UserProfileResponse;
 import com.devteria.post.entity.Post;
 import com.devteria.post.mapper.PostMapper;
 import com.devteria.post.repository.PostRepository;
+import com.devteria.post.repository.httpClient.ProfileClient;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,6 +30,7 @@ public class PostService {
     PostRepository postRepository;
     PostMapper postMapper;
     DateTimeFormatter dateTimeFormatter;
+    ProfileClient profileClient;
 
     public PostResponse createPost(PostRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -50,6 +53,16 @@ public class PostService {
 
         log.info("Authentication: {}", authentication);
 
+        // get user profile
+        UserProfileResponse userProfile = null;
+        try {
+            userProfile = profileClient.getProfile(userId).getResult();
+        } catch (Exception e) {
+            log.error("Error while getting user profile", e);
+        }
+        log.info("User profile: {}", userProfile);
+        String username = userProfile != null ? userProfile.getUsername() : null;
+
         Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page - 1, size, sort);
         var pageData = postRepository.findAllByUserId(userId, pageable);
@@ -57,6 +70,7 @@ public class PostService {
         var postList = pageData.getContent().stream().map(post -> {
             var postResponse = postMapper.toPostResponse(post);
             postResponse.setTimeCreated(dateTimeFormatter.format(post.getCreatedDate()));
+            postResponse.setUsername(username);
             return postResponse;
         }).toList();
 

@@ -8,11 +8,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "profile-service", url = "${profile.services.url}", configuration = {AuthenticationRequestInterceptor.class})
+@FeignClient(name = "profile-service", url = "${profile.services.url}",
+        configuration = AuthenticationRequestInterceptor.class)
 public interface ProfileClient {
 
     @PostMapping(value = "/users/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    ApiResponse<UserProfileResponse> createProfile(@RequestBody ProfileCreationRequest request);
+    ApiResponse<UserProfileResponse> createProfile(
+            @RequestBody ProfileCreationRequest request);
 
     @GetMapping(value = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ApiResponse<UserProfileResponse> getProfileByUserId(

@@ -3,6 +3,8 @@ package com.vti.profile.service;
 import com.vti.profile.dto.request.ProfileCreationRequest;
 import com.vti.profile.dto.response.UserProfileResponse;
 import com.vti.profile.entity.UserProfile;
+import com.vti.profile.exception.AppException;
+import com.vti.profile.exception.ErrorCode;
 import com.vti.profile.mapper.UserProfileMapper;
 import com.vti.profile.repository.UserProfileRepository;
 import lombok.AccessLevel;
@@ -11,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +52,15 @@ public class UserProfileService {
         var profiles = userProfileRepository.findAll();
 
         return profiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
+    }
+
+    public UserProfileResponse getMyProfile() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        var profile = userProfileRepository.findByUserId(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        return userProfileMapper.toUserProfileReponse(profile);
     }
 }
