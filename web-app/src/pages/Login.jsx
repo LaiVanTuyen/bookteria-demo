@@ -45,7 +45,7 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    debugger
+
     try {
       const response = await logIn(username, password);
       console.log("Response body:", response.data);

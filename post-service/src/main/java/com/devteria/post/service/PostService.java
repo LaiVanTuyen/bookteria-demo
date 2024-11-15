@@ -1,5 +1,6 @@
 package com.devteria.post.service;
 
+import com.devteria.post.dto.PageResponse;
 import com.devteria.post.dto.request.PostRequest;
 import com.devteria.post.dto.response.PostResponse;
 import com.devteria.post.entity.Post;
@@ -9,12 +10,15 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
+
 
 @Slf4j
 @Service
@@ -23,8 +27,9 @@ import java.util.List;
 public class PostService {
     PostRepository postRepository;
     PostMapper postMapper;
+    DateTimeFormatter dateTimeFormatter;
 
-    public PostResponse createPost(PostRequest request){
+    public PostResponse createPost(PostRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("Authentication: {}", authentication);
 
@@ -39,15 +44,28 @@ public class PostService {
         return postMapper.toPostResponse(post);
     }
 
-    public List<PostResponse> getMyPosts(){
+    public PageResponse<PostResponse> getMyPosts(int page, int size) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userId = authentication.getName();
 
         log.info("Authentication: {}", authentication);
 
-        return postRepository.findAllByUserId(userId)
-                .stream()
-                .map(postMapper::toPostResponse)
-                .toList();
+        Sort sort = Sort.by("createdDate").descending();
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        var pageData = postRepository.findAllByUserId(userId, pageable);
+
+        var postList = pageData.getContent().stream().map(post -> {
+            var postResponse = postMapper.toPostResponse(post);
+            postResponse.setTimeCreated(dateTimeFormatter.format(post.getCreatedDate()));
+            return postResponse;
+        }).toList();
+
+        return PageResponse.<PostResponse>builder()
+                .currentPage(page)
+                .pageSize(pageData.getSize())
+                .totalPages(pageData.getTotalPages())
+                .totalElements(pageData.getTotalElements())
+                .data(postList)
+                .build();
     }
 }

@@ -5,28 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa0d1931-5f39-41dd-adef-6fb0ef8ece55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo/devteria-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SideMenu.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/configurations/configuration.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/configurations/httpClient.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Login.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Scene.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/authenticationService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/localStorageService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/userService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/java/com/vti/gateway/configuration/WebClientConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/java/com/vti/gateway/configuration/WebClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/dto/PageResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Post.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/Profile.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/postService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../post-service/src/main/java/com/devteria/post/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configurations/configuration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurations/configuration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Scene.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Scene.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AppRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/userService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/userService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,22 +30,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LaiVanTuyen"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LaiVanTuyen&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/LaiVanTuyen/bookteria-demo.git",
-    "accountId": "cd2d8869-9cee-4c7e-8c8a-0a1677705647"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LaiVanTuyen/bookteria-demo.git&quot;,
+    &quot;accountId&quot;: &quot;cd2d8869-9cee-4c7e-8c8a-0a1677705647&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2ojbEdJ8TnwG9zK4WibSLZdMC3K" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,7 +54,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "course/config-cors",
+    "git-widget-placeholder": "course/pagination",
     "last_opened_file_path": "D:/LotteLDCC/LDCC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -114,6 +108,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731385828004</updated>
       <workItem from="1731385835809" duration="3987000" />
+      <workItem from="1731566263817" duration="1385000" />
     </task>
     <servers />
   </component>
