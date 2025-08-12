@@ -10,4 +10,3 @@ public interface FileMgmtMapper {
     @Mapping(target = "id", source = "name")
     FileMgmt toFileMgmt(FileInfo fileInfo);
 }
-
