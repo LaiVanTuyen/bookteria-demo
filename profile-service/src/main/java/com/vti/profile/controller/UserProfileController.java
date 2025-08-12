@@ -1,6 +1,7 @@
 package com.vti.profile.controller;
 
 import com.vti.profile.dto.ApiResponse;
+import com.vti.profile.dto.request.UpdateProfileRequest;
 import com.vti.profile.dto.response.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,9 @@ import com.vti.profile.service.UserProfileService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,20 @@ public class UserProfileController {
     ApiResponse<UserProfileResponse> getMyProfile() {
         return ApiResponse.<UserProfileResponse>builder()
                 .result(userProfileService.getMyProfile())
+                .build();
+    }
+
+    @PutMapping("/users/my-profile")
+    ApiResponse<UserProfileResponse> updateMyProfile(@RequestBody UpdateProfileRequest request) {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.updateMyProfile(request))
+                .build();
+    }
+
+    @PutMapping("/users/avatar")
+    ApiResponse<UserProfileResponse> updateAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+        return ApiResponse.<UserProfileResponse>builder()
+                .result(userProfileService.updateAvatar(file))
                 .build();
     }
 

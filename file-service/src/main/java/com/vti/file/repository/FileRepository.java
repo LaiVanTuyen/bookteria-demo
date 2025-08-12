@@ -28,6 +28,10 @@ public class FileRepository {
 
     public FileInfo store(MultipartFile file) throws IOException {
         Path folder = Paths.get(storageDir);
+        // Tạo folder nếu chưa tồn tại
+        if (!Files.exists(folder)) {
+            Files.createDirectories(folder);
+        }
 
         String fileExtension = StringUtils
                 .getFilenameExtension(file.getOriginalFilename());
