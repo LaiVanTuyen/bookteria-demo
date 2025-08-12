@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/file-service/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/file-service/README.md" />
+              <option name="originalContent" value="# post service&#10;(sequence diagram)&#10;![img_1.png](img_1.png)&#10; Quy trình xử lý API GET /media/xxxx&#10;User gửi request GET /media/xxxx đến FileController.&#10;&#10;FileController gọi phương thức get() của FileService.&#10;&#10;FileService gọi get File info từ FileManagementRepository để lấy metadata (thông tin file).&#10;&#10;FileManagementRepository truy vấn Database (find) để lấy metadata và trả về cho FileService.&#10;&#10;FileService tiếp tục gọi read file từ FileRepository.&#10;&#10;FileRepository đọc file từ File Storage và trả nội dung file về.&#10;&#10;FileService gom cả file và metadata, trả về cho FileController.&#10;&#10;FileController trả response cho User chứa file và metadata.&#10;&#10;" />
+              <option name="updatedContent" value="# File Service&#10;&#10;## Sequence Diagram&#10;![img_1.png](img_1.png)&#10;&#10;##  API GET /media/xxxx Handling Process&#10;&#10;### Vietnamese&#10;1. Người dùng gửi request GET /media/xxxx đến FileController.&#10;2. FileController gọi phương thức get() của FileService.&#10;3. FileService gọi lấy thông tin file từ FileManagementRepository để lấy metadata (thông tin file).&#10;4. FileManagementRepository truy vấn Database (find) để lấy metadata và trả về cho FileService.&#10;5. FileService tiếp tục gọi đọc file từ FileRepository.&#10;6. FileRepository đọc file từ File Storage và trả nội dung file về.&#10;7. FileService tổng hợp cả file và metadata, trả về cho FileController.&#10;8. FileController trả response cho người dùng, gồm file và metadata.&#10;&#10;### English&#10;1. User sends a GET /media/xxxx request to FileController.&#10;2. FileController calls the get() method of FileService.&#10;3. FileService requests file info from FileManagementRepository to get metadata.&#10;4. FileManagementRepository queries the database (find) to retrieve metadata and returns it to FileService.&#10;5. FileService then calls read file from FileRepository.&#10;6. FileRepository reads the file from File Storage and returns the file content.&#10;7. FileService combines both file and metadata, and returns them to FileController.&#10;8. FileController responds to the user with the file and metadata." />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

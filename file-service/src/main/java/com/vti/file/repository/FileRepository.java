@@ -1,7 +1,10 @@
 package com.vti.file.repository;
 
 import com.vti.file.dto.FileInfo;
+import com.vti.file.entity.FileMgmt;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
@@ -26,11 +29,9 @@ public class FileRepository {
     public FileInfo store(MultipartFile file) throws IOException {
         Path folder = Paths.get(storageDir);
 
-        if (!Files.exists(folder)) {
-            Files.createDirectories(folder);
-        }
+        String fileExtension = StringUtils
+                .getFilenameExtension(file.getOriginalFilename());
 
-        String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
         String fileName = Objects.isNull(fileExtension)
                 ? UUID.randomUUID().toString()
                 : UUID.randomUUID() + "." + fileExtension;
@@ -41,10 +42,16 @@ public class FileRepository {
 
         return FileInfo.builder()
                 .name(fileName)
-                .contentType(file.getContentType())
                 .size(file.getSize())
+                .contentType(file.getContentType())
                 .md5Checksum(DigestUtils.md5DigestAsHex(file.getInputStream()))
-                .path(urlPrefix + fileName)
+                .path(filePath.toString())
+                .url(urlPrefix + fileName)
                 .build();
+    }
+
+    public Resource read(FileMgmt fileMgmt) throws IOException {
+        var data = Files.readAllBytes(Path.of(fileMgmt.getPath()));
+        return new ByteArrayResource(data);
     }
 }

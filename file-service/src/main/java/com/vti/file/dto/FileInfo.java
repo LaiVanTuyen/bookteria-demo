@@ -14,4 +14,5 @@ public class FileInfo {
     long size;
     String md5Checksum;
     String path;
+    String url;
 }
