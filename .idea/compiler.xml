@@ -9,7 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
       </profile>
-      <profile name="Annotation profile for file-service" enabled="true">
+      <profile name="Annotation profile for profile-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -22,10 +22,10 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
         </processorPath>
-        <module name="post-service" />
         <module name="profile-service" />
-        <module name="file-service" />
+        <module name="post-service" />
         <module name="identity-service" />
+        <module name="file-service" />
         <module name="notification-service" />
       </profile>
     </annotationProcessing>

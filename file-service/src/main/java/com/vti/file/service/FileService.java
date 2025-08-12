@@ -1,35 +1,40 @@
 package com.vti.file.service;
 
+import com.vti.file.dto.response.FileResponse;
+import com.vti.file.mapper.FileMgmtMapper;
+import com.vti.file.repository.FileMgmtRepository;
+import com.vti.file.repository.FileRepository;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Objects;
-import java.util.UUID;
+
 
 @Service
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class FileService {
-    public Object uploadFile(MultipartFile file) throws IOException {
-        Path folder = Paths.get("C:/upload");
+    FileRepository fileRepository;
+    FileMgmtRepository fileMgmtRepository;
+    FileMgmtMapper fileMgmtMapper;
 
-        if (!Files.exists(folder)) {
-            Files.createDirectories(folder);
-        }
+    public FileResponse uploadFile(MultipartFile file) throws IOException {
+        // Store the file in the local file system
+        var fileInfo = fileRepository.store(file);
+        // Create file management information
+        var fileMgmt = fileMgmtMapper.toFileMgmt(fileInfo);
 
-        String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-        String fileName = Objects.isNull(fileExtension)
-                ? UUID.randomUUID().toString()
-                : UUID.randomUUID() + "." + fileExtension;
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        fileMgmt.setOwnerId(userId);
+        fileMgmtRepository.save(fileMgmt);
 
-        Path filePath = folder.resolve(fileName).normalize().toAbsolutePath();
-
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        return filePath.toString();
+        return FileResponse.builder()
+                .originalFileName(file.getOriginalFilename())
+                .url(fileInfo.getPath())
+                .build();
     }
 }
