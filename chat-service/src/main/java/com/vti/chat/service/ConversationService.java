@@ -76,34 +76,37 @@ public class ConversationService {
         var sortedIds = userIds.stream().sorted().toList();
         String userIdsHash = generateParticipantHash(sortedIds);
 
-        // Tạo danh sách thông tin người tham gia
-        List<ParticipantInfo> participantInfos = List.of(
-                ParticipantInfo.builder()
-                        .userId(userInfo.getUserId())
-                        .username(userInfo.getUsername())
-                        .firstName(userInfo.getFirstName())
-                        .lastName(userInfo.getLastName())
-                        .avatar(userInfo.getAvatar())
-                        .build(),
-                ParticipantInfo.builder()
-                        .userId(participantInfo.getUserId())
-                        .username(participantInfo.getUsername())
-                        .firstName(participantInfo.getFirstName())
-                        .lastName(participantInfo.getLastName())
-                        .avatar(participantInfo.getAvatar())
-                        .build()
-        );
+        var conversation = conversationRepository.findByParticipantsHash(userIdsHash)
+                .orElseGet(() ->{
+                    // Tạo danh sách thông tin người tham gia
+                    List<ParticipantInfo> participantInfos = List.of(
+                            ParticipantInfo.builder()
+                                    .userId(userInfo.getUserId())
+                                    .username(userInfo.getUsername())
+                                    .firstName(userInfo.getFirstName())
+                                    .lastName(userInfo.getLastName())
+                                    .avatar(userInfo.getAvatar())
+                                    .build(),
+                            ParticipantInfo.builder()
+                                    .userId(participantInfo.getUserId())
+                                    .username(participantInfo.getUsername())
+                                    .firstName(participantInfo.getFirstName())
+                                    .lastName(participantInfo.getLastName())
+                                    .avatar(participantInfo.getAvatar())
+                                    .build()
+                    );
 
-        // Khởi tạo đối tượng Conversation và lưu vào database
-        Conversation conversation = Conversation.builder()
-                .type(request.getType())
-                .participantsHash(userIdsHash)
-                .createdDate(Instant.now())
-                .modifiedDate(Instant.now())
-                .participants(participantInfos)
-                .build();
+                    // Khởi tạo đối tượng Conversation và lưu vào database
+                    Conversation newConversation = Conversation.builder()
+                            .type(request.getType())
+                            .participantsHash(userIdsHash)
+                            .createdDate(Instant.now())
+                            .modifiedDate(Instant.now())
+                            .participants(participantInfos)
+                            .build();
+                    return conversationRepository.save(newConversation);
+                });
 
-        conversation = conversationRepository.save(conversation);
         return toConversationResponse(conversation);
     }
 
