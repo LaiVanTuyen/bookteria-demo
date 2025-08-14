@@ -15,7 +15,7 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1007, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_DOB(1008, "Your age must be at least {min}", HttpStatus.BAD_REQUEST),
-    ;
+    CONVERSATION_NOT_FOUND(1009, "Chat Conversation not found" , HttpStatus.NOT_FOUND ),;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

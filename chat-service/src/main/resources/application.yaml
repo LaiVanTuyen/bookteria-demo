@@ -8,6 +8,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:251101@localhost:27017/chat-service?authSource=admin
+      auto-index-creation: true
 
 app:
   services:
