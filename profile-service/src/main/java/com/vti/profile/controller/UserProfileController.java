@@ -1,6 +1,7 @@
 package com.vti.profile.controller;
 
 import com.vti.profile.dto.ApiResponse;
+import com.vti.profile.dto.request.SearchUserRequest;
 import com.vti.profile.dto.request.UpdateProfileRequest;
 import com.vti.profile.dto.response.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +69,13 @@ public class UserProfileController {
     ApiResponse<UserProfileResponse> updateAvatar(@RequestParam("file") MultipartFile file) throws IOException {
         return ApiResponse.<UserProfileResponse>builder()
                 .result(userProfileService.updateAvatar(file))
+                .build();
+    }
+
+    @PostMapping("/users/search")
+    ApiResponse<List<UserProfileResponse>> search(@RequestBody SearchUserRequest request) {
+        return ApiResponse.<List<UserProfileResponse>>builder()
+                .result(userProfileService.search(request))
                 .build();
     }
 

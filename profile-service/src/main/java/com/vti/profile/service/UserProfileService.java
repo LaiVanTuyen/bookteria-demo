@@ -1,6 +1,7 @@
 package com.vti.profile.service;
 
 import com.vti.profile.dto.request.ProfileCreationRequest;
+import com.vti.profile.dto.request.SearchUserRequest;
 import com.vti.profile.dto.request.UpdateProfileRequest;
 import com.vti.profile.dto.response.UserProfileResponse;
 import com.vti.profile.entity.UserProfile;
@@ -93,5 +94,14 @@ public class UserProfileService {
         profile.setAvatar(response.getResult().getUrl());
 
         return userProfileMapper.toUserProfileResponse(userProfileRepository.save(profile));
+    }
+
+    public List<UserProfileResponse> search(SearchUserRequest request) {
+        var userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<UserProfile> userProfiles = userProfileRepository.findAllByUsernameLike(request.getKeyword());
+        return userProfiles.stream()
+                .filter(userProfile -> !userId.equals(userProfile.getUserId()))
+                .map(userProfileMapper::toUserProfileResponse)
+                .toList();
     }
 }
