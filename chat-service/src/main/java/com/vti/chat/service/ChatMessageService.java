@@ -1,5 +1,6 @@
 package com.vti.chat.service;
 
+import com.corundumstudio.socketio.SocketIOServer;
 import com.vti.chat.dto.request.ChatMessageRequest;
 import com.vti.chat.dto.response.ChatMessageResponse;
 import com.vti.chat.entity.ChatMessage;
@@ -30,12 +31,13 @@ public class ChatMessageService {
     ChatMessageRepository chatMessageRepository;
     ConversationRepository conversationRepository;
     ProfileClient profileClient;
-    private final ChatMessageMapper chatMessageMapper;
+    ChatMessageMapper chatMessageMapper;
+    SocketIOServer server;
 
     public ChatMessageResponse create(@Valid ChatMessageRequest request) {
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
         // Validate conversationId
-        var conversation = conversationRepository.findById(request.getConversationId())
+        conversationRepository.findById(request.getConversationId())
                 .orElseThrow(
                         () -> new AppException(ErrorCode.CONVERSATION_NOT_FOUND))
                 .getParticipants()
@@ -66,6 +68,12 @@ public class ChatMessageService {
 
         //Create Chat Message
         chatMessage = chatMessageRepository.save(chatMessage);
+        String message = chatMessage.getMessage();
+
+        // publish socket event to a client
+        server.getAllClients().forEach(client -> {
+            client.sendEvent("message", message);
+        });
 
         // Convert to Response
         return toChatMessageResponse(chatMessage);
@@ -74,7 +82,7 @@ public class ChatMessageService {
     public List<ChatMessageResponse> getMessages(String conversationId) {
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
         // Validate conversationId
-        var conversation = conversationRepository.findById(conversationId)
+        conversationRepository.findById(conversationId)
                 .orElseThrow(
                         () -> new AppException(ErrorCode.CONVERSATION_NOT_FOUND))
                 .getParticipants()
