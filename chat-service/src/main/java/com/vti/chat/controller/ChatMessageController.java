@@ -1,5 +1,6 @@
 package com.vti.chat.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vti.chat.dto.ApiResponse;
 import com.vti.chat.dto.request.ChatMessageRequest;
 import com.vti.chat.dto.response.ChatMessageResponse;
@@ -21,7 +22,7 @@ public class ChatMessageController {
 
     @PostMapping("/create")
     ApiResponse<ChatMessageResponse> create(
-            @RequestBody @Valid ChatMessageRequest request) {
+            @RequestBody @Valid ChatMessageRequest request) throws JsonProcessingException {
         return ApiResponse.<ChatMessageResponse>builder()
                 .result(chatMessageService.create(request))
                 .build();
